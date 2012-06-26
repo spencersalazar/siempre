@@ -1,0 +1,315 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09580307159A6FB100508D89 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09580306159A6FB100508D89 /* UIKit.framework */; };
+		09580309159A6FB100508D89 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09580308159A6FB100508D89 /* Foundation.framework */; };
+		0958030B159A6FB100508D89 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0958030A159A6FB100508D89 /* CoreGraphics.framework */; };
+		0958030D159A6FB100508D89 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0958030C159A6FB100508D89 /* GLKit.framework */; };
+		0958030F159A6FB100508D89 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0958030E159A6FB100508D89 /* OpenGLES.framework */; };
+		09580315159A6FB100508D89 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09580313159A6FB100508D89 /* InfoPlist.strings */; };
+		09580317159A6FB100508D89 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09580316159A6FB100508D89 /* main.m */; };
+		0958031B159A6FB100508D89 /* MGAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0958031A159A6FB100508D89 /* MGAppDelegate.mm */; };
+		0958031D159A6FB100508D89 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0958031C159A6FB100508D89 /* Shader.fsh */; };
+		0958031F159A6FB100508D89 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0958031E159A6FB100508D89 /* Shader.vsh */; };
+		09580322159A6FB100508D89 /* MGViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 09580321159A6FB100508D89 /* MGViewController.mm */; };
+		09580325159A6FB100508D89 /* MGViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09580323159A6FB100508D89 /* MGViewController_iPhone.xib */; };
+		09580328159A6FB100508D89 /* MGViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09580326159A6FB100508D89 /* MGViewController_iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		09580302159A6FB100508D89 /* Mood Globe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mood Globe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		09580306159A6FB100508D89 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		09580308159A6FB100508D89 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0958030A159A6FB100508D89 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0958030C159A6FB100508D89 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		0958030E159A6FB100508D89 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		09580312159A6FB100508D89 /* Mood Globe-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mood Globe-Info.plist"; sourceTree = "<group>"; };
+		09580314159A6FB100508D89 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		09580316159A6FB100508D89 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		09580318159A6FB100508D89 /* Mood Globe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mood Globe-Prefix.pch"; sourceTree = "<group>"; };
+		09580319159A6FB100508D89 /* MGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGAppDelegate.h; sourceTree = "<group>"; };
+		0958031A159A6FB100508D89 /* MGAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MGAppDelegate.mm; sourceTree = "<group>"; };
+		0958031C159A6FB100508D89 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		0958031E159A6FB100508D89 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		09580320159A6FB100508D89 /* MGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGViewController.h; sourceTree = "<group>"; };
+		09580321159A6FB100508D89 /* MGViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MGViewController.mm; sourceTree = "<group>"; };
+		09580324159A6FB100508D89 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MGViewController_iPhone.xib; sourceTree = "<group>"; };
+		09580327159A6FB100508D89 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MGViewController_iPad.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		095802FF159A6FB100508D89 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09580307159A6FB100508D89 /* UIKit.framework in Frameworks */,
+				09580309159A6FB100508D89 /* Foundation.framework in Frameworks */,
+				0958030B159A6FB100508D89 /* CoreGraphics.framework in Frameworks */,
+				0958030D159A6FB100508D89 /* GLKit.framework in Frameworks */,
+				0958030F159A6FB100508D89 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		095802F7159A6FB100508D89 = {
+			isa = PBXGroup;
+			children = (
+				09580310159A6FB100508D89 /* Mood Globe */,
+				09580305159A6FB100508D89 /* Frameworks */,
+				09580303159A6FB100508D89 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		09580303159A6FB100508D89 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				09580302159A6FB100508D89 /* Mood Globe.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		09580305159A6FB100508D89 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				09580306159A6FB100508D89 /* UIKit.framework */,
+				09580308159A6FB100508D89 /* Foundation.framework */,
+				0958030A159A6FB100508D89 /* CoreGraphics.framework */,
+				0958030C159A6FB100508D89 /* GLKit.framework */,
+				0958030E159A6FB100508D89 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		09580310159A6FB100508D89 /* Mood Globe */ = {
+			isa = PBXGroup;
+			children = (
+				09580319159A6FB100508D89 /* MGAppDelegate.h */,
+				0958031A159A6FB100508D89 /* MGAppDelegate.mm */,
+				0958031C159A6FB100508D89 /* Shader.fsh */,
+				0958031E159A6FB100508D89 /* Shader.vsh */,
+				09580320159A6FB100508D89 /* MGViewController.h */,
+				09580321159A6FB100508D89 /* MGViewController.mm */,
+				09580323159A6FB100508D89 /* MGViewController_iPhone.xib */,
+				09580326159A6FB100508D89 /* MGViewController_iPad.xib */,
+				09580311159A6FB100508D89 /* Supporting Files */,
+			);
+			path = "Mood Globe";
+			sourceTree = "<group>";
+		};
+		09580311159A6FB100508D89 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				09580312159A6FB100508D89 /* Mood Globe-Info.plist */,
+				09580313159A6FB100508D89 /* InfoPlist.strings */,
+				09580316159A6FB100508D89 /* main.m */,
+				09580318159A6FB100508D89 /* Mood Globe-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		09580301159A6FB100508D89 /* Mood Globe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0958032B159A6FB100508D89 /* Build configuration list for PBXNativeTarget "Mood Globe" */;
+			buildPhases = (
+				095802FE159A6FB100508D89 /* Sources */,
+				095802FF159A6FB100508D89 /* Frameworks */,
+				09580300159A6FB100508D89 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mood Globe";
+			productName = "Mood Globe";
+			productReference = 09580302159A6FB100508D89 /* Mood Globe.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		095802F9159A6FB100508D89 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MG;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Stanford University";
+			};
+			buildConfigurationList = 095802FC159A6FB100508D89 /* Build configuration list for PBXProject "Mood Globe" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 095802F7159A6FB100508D89;
+			productRefGroup = 09580303159A6FB100508D89 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				09580301159A6FB100508D89 /* Mood Globe */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		09580300159A6FB100508D89 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09580315159A6FB100508D89 /* InfoPlist.strings in Resources */,
+				0958031D159A6FB100508D89 /* Shader.fsh in Resources */,
+				0958031F159A6FB100508D89 /* Shader.vsh in Resources */,
+				09580325159A6FB100508D89 /* MGViewController_iPhone.xib in Resources */,
+				09580328159A6FB100508D89 /* MGViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		095802FE159A6FB100508D89 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09580317159A6FB100508D89 /* main.m in Sources */,
+				0958031B159A6FB100508D89 /* MGAppDelegate.mm in Sources */,
+				09580322159A6FB100508D89 /* MGViewController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		09580313159A6FB100508D89 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09580314159A6FB100508D89 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		09580323159A6FB100508D89 /* MGViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09580324159A6FB100508D89 /* en */,
+			);
+			name = MGViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		09580326159A6FB100508D89 /* MGViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09580327159A6FB100508D89 /* en */,
+			);
+			name = MGViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		09580329159A6FB100508D89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0958032A159A6FB100508D89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0958032C159A6FB100508D89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mood Globe/Mood Globe-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "Mood Globe/Mood Globe-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0958032D159A6FB100508D89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mood Globe/Mood Globe-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "Mood Globe/Mood Globe-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		095802FC159A6FB100508D89 /* Build configuration list for PBXProject "Mood Globe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09580329159A6FB100508D89 /* Debug */,
+				0958032A159A6FB100508D89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0958032B159A6FB100508D89 /* Build configuration list for PBXNativeTarget "Mood Globe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0958032C159A6FB100508D89 /* Debug */,
+				0958032D159A6FB100508D89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 095802F9159A6FB100508D89 /* Project object */;
+}
