@@ -12,53 +12,30 @@
 #include <OpenGLES/ES1/gl.h>
 #include <OpenGLES/ES1/glext.h>
 
-
-GLfloat gCubeVertexData[360] = 
+// if a given triangle's vertexes have an u coord that varies more than thresh,
+// bump it up by 1.0 so that it interpolates correctly and wrap around
+void wrapTexCoordsX(GLtrif &t, GLfloat thresh = 0.2f)
 {
-    // Data layout for each line below is:
-    // positionX|Y|Z           normalX|Y|Z           color R|G|B|A
-    0.5f, -0.5f, -0.5f,        1.0f, 0.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, 0.5f,          1.0f, 0.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
+    if(t.a.texcoord.x - t.b.texcoord.x > thresh)
+        t.b.texcoord.x += 1.0;
     
-    0.5f, 0.5f, -0.5f,         0.0f, 1.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f,        0.0f, 1.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, 0.5f,          0.0f, 1.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, 0.5f,          0.0f, 1.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f,        0.0f, 1.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,         0.0f, 1.0f, 0.0f,     1.0f, 0.0f, 0.0f, 1.0f,
+    if(t.b.texcoord.x - t.a.texcoord.x > thresh)
+        t.a.texcoord.x += 1.0;
     
-    -0.5f, 0.5f, -0.5f,        -1.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,       -1.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,         -1.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,         -1.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,       -1.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f,        -1.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
+    if(t.a.texcoord.x - t.c.texcoord.x > thresh)
+        t.c.texcoord.x += 1.0;
     
-    -0.5f, -0.5f, -0.5f,       0.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f,        0.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f,        0.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f,        0.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f,        0.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,         0.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f, 1.0f,
+    if(t.c.texcoord.x - t.a.texcoord.x > thresh)
+        t.a.texcoord.x += 1.0;
     
-    0.5f, 0.5f, 0.5f,          0.0f, 0.0f, 1.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,     1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f,        0.0f, 0.0f, 1.0f,     1.0f, 0.0f, 0.0f, 1.0f,
+    if(t.b.texcoord.x - t.c.texcoord.x > thresh)
+        t.c.texcoord.x += 1.0;
     
-    0.5f, -0.5f, -0.5f,        0.0f, 0.0f, -1.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, -1.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, -1.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, -1.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, -1.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f,        0.0f, 0.0f, -1.0f,    1.0f, 0.0f, 0.0f, 1.0f,
-};
+    if(t.c.texcoord.x - t.b.texcoord.x > thresh)
+        t.b.texcoord.x += 1.0;
+}
+
+
 
 @interface MGViewController () {
     GLuint _program;
@@ -105,9 +82,10 @@ GLfloat gCubeVertexData[360] =
     
     glEnable(GL_TEXTURE_2D);
     earthTex = loadTexture(@"Land_shallow_topo_2048.jpg");
+    //earthTex = loadTexture(@"grayscale.png");
     
     // number of subdivisions
-    int N = 5;
+    int N = 3;
     
     numGlobeTris = 20;
     for(int n = 1; n < N; n++) numGlobeTris *= 4;
@@ -176,6 +154,8 @@ GLfloat gCubeVertexData[360] =
         globeTris[i].c.texcoord = globeTris[i].c.vertex.toLatLong();
 
         globeTris[i].a.color = globeTris[i].b.color = globeTris[i].c.color = c;
+        
+        wrapTexCoordsX(globeTris[i]);
     }
     
     // subdivide
@@ -248,6 +228,11 @@ GLfloat gCubeVertexData[360] =
             z.c.vertex = bc_midpt/bc_midpt.magnitude();
             z.c.normal = z.c.vertex;
             z.c.texcoord = z.c.vertex.toLatLong();
+            
+            wrapTexCoordsX(w);
+            wrapTexCoordsX(x);
+            wrapTexCoordsX(y);
+            wrapTexCoordsX(z);
             
             globeTris[i] = w;
             globeTris[i+numTris*1] = x;
@@ -361,8 +346,8 @@ GLfloat gCubeVertexData[360] =
     GLfloat light_ambient[] = { 0, 0, 0, 0.0 };
     GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
     GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat light0_position[] = { 50, 0, 50, 0.5 };
-    GLfloat light1_position[] = { -50, 0, 50, 0.5 };
+    GLfloat light0_position[] = { 25, 0, 50, 0.5 };
+    GLfloat light1_position[] = { -25, 0, 50, 0.5 };
     //GLfloat light_position[] = { 0.0, 0.0, -1.0, 0.0 };
     
     GLfloat lmodel_ambient[] = { 0.0, 0.0, 0.0, 0.0 };
@@ -384,14 +369,15 @@ GLfloat gCubeVertexData[360] =
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef(0, 0, -3);
+//    glRotatef(-_rotation/M_PI*180.0f, 0, 0, 1);
+    glRotatef(-_rotation/M_PI*180.0f, 0, 1, 0);
+//    glRotatef(180, 0, 1, 0);
     glRotatef(90, 1, 0, 0);
-    glRotatef(-_rotation/M_PI*180.0f, 0, 0, 1);
+
     
     /*** supply primitives ***/
     
     glEnable(GL_TEXTURE_2D);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glBindTexture(GL_TEXTURE_2D, earthTex);
         
     glVertexPointer(3, GL_FLOAT, sizeof(GLgeoprimf), &globeTris[0].a.vertex);

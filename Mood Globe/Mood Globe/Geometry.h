@@ -22,6 +22,7 @@ struct GLvertex3f
     GLfloat z;
     
     GLfloat magnitude() { return sqrtf(x*x+y*y+z*z); }
+    GLfloat magnitudeSquared() { return x*x+y*y+z*z; }
     
     GLvertex2f toLatLong();
 } __attribute__((packed));
@@ -43,6 +44,10 @@ struct GLvertex2f
 {
     GLfloat x;
     GLfloat y;
+    
+    GLfloat magnitude() { return sqrtf(x*x+y*y); }
+    GLfloat magnitudeSquared() { return x*x+y*y; }
+
 } __attribute__((packed));
 
 // geometry primitve, i.e. vertex/normal/color/uv

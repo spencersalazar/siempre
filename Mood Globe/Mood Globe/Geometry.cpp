@@ -7,12 +7,14 @@
 //
 
 #include "Geometry.h"
+#include <stdio.h>
 
 GLvertex2f GLvertex3f::toLatLong()
 {
     GLvertex2f ll;
-    ll.x = (atan2f(y, x) / M_PI + 1.0f) * 0.5f;
+    ll.x = (atan2f(y,x) / M_PI + 1.0f) * 0.5f;
     ll.y = asinf(z) / M_PI + 0.5f;
+    
     return ll;
 }
 
