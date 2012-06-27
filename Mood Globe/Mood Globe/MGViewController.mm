@@ -96,6 +96,8 @@ GLfloat gCubeVertexData[360] =
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
+    //int N = 
+    
     numGlobeTris = 20;
     globeTris = new GLtrif[numGlobeTris];
     memset(globeTris, 0, sizeof(GLtrif)*numGlobeTris);
@@ -232,55 +234,60 @@ GLfloat gCubeVertexData[360] =
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
     
     _rotation += self.timeSinceLastUpdate * 0.5f;
+    while(_rotation > M_PI*2)
+        _rotation -= M_PI*2;
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    /*** matrices ***/
+    /*** clear ***/
+    
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    /*** projection ***/
 
     glMatrixMode(GL_PROJECTION);
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     glLoadMatrixf(projectionMatrix.m);
     
-    glMatrixMode(GL_MODELVIEW);
-    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
-    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
-    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 1.5f);
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
-    modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
-    
-    glLoadMatrixf((float *) modelViewMatrix.m);
-    //glLoadIdentity();
-    
-    /*** clear ***/
-
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
     /*** lighting ***/
     
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
     
     glShadeModel(GL_SMOOTH);
+    
+    /*** model/view ***/
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslatef(0, 0, -5);
+    glRotatef(_rotation/M_PI*180.0f, 0, 1, 0);
     
     /*** lighting ***/
     
     //GLfloat light_ambient[] = { 0.8, 0.8, 0.8, 1.0 };
-    GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 0.0 };
+    GLfloat light_ambient[] = { 0, 0, 0, 0.0 };
     GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
     GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat light_position[] = { 1.0, 1.0, -6.0, 1.0 };
+    GLfloat light0_position[] = { 50, 0, 50, 0.5 };
+    GLfloat light1_position[] = { -50, 0, 50, 0.5 };
     //GLfloat light_position[] = { 0.0, 0.0, -1.0, 0.0 };
     
     GLfloat lmodel_ambient[] = { 0.0, 0.0, 0.0, 0.0 };
-    GLfloat emissive[] = { 0.0, 0.0, 0.0, 1.0 };
     
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+    glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+    
+    glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
     
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
     
@@ -290,8 +297,6 @@ GLfloat gCubeVertexData[360] =
     
     // Render the object with GLKit
 //    [self.effect prepareToDraw];
-    
-    glScalef(0.25, 0.25, 0.25);
     
 //    glVertexPointer(3, GL_FLOAT, 10*sizeof(GLfloat), gCubeVertexData);
 //    glEnableClientState(GL_VERTEX_ARRAY);
