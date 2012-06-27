@@ -23,6 +23,7 @@
 		09580333159A8EEC00508D89 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09580332159A8EEC00508D89 /* Geometry.cpp */; };
 		0958033B159AA59E00508D89 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0958033A159AA59E00508D89 /* Texture.mm */; };
 		0958033E159AA5C100508D89 /* Land_shallow_topo_2048.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0958033D159AA5C100508D89 /* Land_shallow_topo_2048.jpg */; };
+		09580342159B066F00508D89 /* MGGlobe.mm in Sources */ = {isa = PBXBuildFile; fileRef = 09580341159B066F00508D89 /* MGGlobe.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		09580339159AA59E00508D89 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		0958033A159AA59E00508D89 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		0958033D159AA5C100508D89 /* Land_shallow_topo_2048.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Land_shallow_topo_2048.jpg; sourceTree = "<group>"; };
+		09580341159B066F00508D89 /* MGGlobe.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MGGlobe.mm; sourceTree = "<group>"; };
+		09580343159B068600508D89 /* MGGlobe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGGlobe.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				09580332159A8EEC00508D89 /* Geometry.cpp */,
 				09580323159A6FB100508D89 /* MGViewController_iPhone.xib */,
 				09580326159A6FB100508D89 /* MGViewController_iPad.xib */,
+				09580343159B068600508D89 /* MGGlobe.h */,
+				09580341159B066F00508D89 /* MGGlobe.mm */,
 				09580311159A6FB100508D89 /* Supporting Files */,
 			);
 			path = "Mood Globe";
@@ -201,6 +206,7 @@
 				09580322159A6FB100508D89 /* MGViewController.mm in Sources */,
 				09580333159A8EEC00508D89 /* Geometry.cpp in Sources */,
 				0958033B159AA59E00508D89 /* Texture.mm in Sources */,
+				09580342159B066F00508D89 /* MGGlobe.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,9 +9,9 @@
 #ifndef Mood_Globe_Geometry_h
 #define Mood_Globe_Geometry_h
 
-#include <math.h>
-#include <OpenGLES/ES1/gl.h>
-#include <OpenGLES/ES1/glext.h>
+#import <math.h>
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
 
 struct GLvertex2f;
 
