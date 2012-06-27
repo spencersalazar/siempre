@@ -20,6 +20,7 @@
 		09580322159A6FB100508D89 /* MGViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 09580321159A6FB100508D89 /* MGViewController.mm */; };
 		09580325159A6FB100508D89 /* MGViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09580323159A6FB100508D89 /* MGViewController_iPhone.xib */; };
 		09580328159A6FB100508D89 /* MGViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09580326159A6FB100508D89 /* MGViewController_iPad.xib */; };
+		09580333159A8EEC00508D89 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09580332159A8EEC00508D89 /* Geometry.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		09580321159A6FB100508D89 /* MGViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MGViewController.mm; sourceTree = "<group>"; };
 		09580324159A6FB100508D89 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MGViewController_iPhone.xib; sourceTree = "<group>"; };
 		09580327159A6FB100508D89 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MGViewController_iPad.xib; sourceTree = "<group>"; };
+		09580332159A8EEC00508D89 /* Geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
+		09580334159A8F0000508D89 /* Geometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Geometry.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,8 @@
 				09580323159A6FB100508D89 /* MGViewController_iPhone.xib */,
 				09580326159A6FB100508D89 /* MGViewController_iPad.xib */,
 				09580311159A6FB100508D89 /* Supporting Files */,
+				09580332159A8EEC00508D89 /* Geometry.cpp */,
+				09580334159A8F0000508D89 /* Geometry.h */,
 			);
 			path = "Mood Globe";
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				09580317159A6FB100508D89 /* main.m in Sources */,
 				0958031B159A6FB100508D89 /* MGAppDelegate.mm in Sources */,
 				09580322159A6FB100508D89 /* MGViewController.mm in Sources */,
+				09580333159A8EEC00508D89 /* Geometry.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
