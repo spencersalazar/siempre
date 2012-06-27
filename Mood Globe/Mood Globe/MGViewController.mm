@@ -8,6 +8,9 @@
 
 #import "MGViewController.h"
 #import "Geometry.h"
+#import "Texture.h"
+#include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES1/glext.h>
 
 
 GLfloat gCubeVertexData[360] = 
@@ -60,6 +63,8 @@ GLfloat gCubeVertexData[360] =
 @interface MGViewController () {
     GLuint _program;
     
+    GLuint earthTex;
+    
     GLKMatrix4 _modelViewProjectionMatrix;
     GLKMatrix3 _normalMatrix;
     float _rotation;
@@ -96,6 +101,11 @@ GLfloat gCubeVertexData[360] =
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
+    [self setupGL];
+    
+    glEnable(GL_TEXTURE_2D);
+    earthTex = loadTexture(@"Land_shallow_topo_2048.jpg");
+    
     // number of subdivisions
     int N = 5;
     
@@ -106,7 +116,7 @@ GLfloat gCubeVertexData[360] =
     // draw globe from subdivided icosahedron
     // see http://en.wikipedia.org/wiki/Icosahedron
     
-    // golden ratio
+    // (inverse) golden ratio
     float phi = (-1 + sqrtf(5))/2;
     
     // the 12 individual vertices of the icosahedron
@@ -145,7 +155,7 @@ GLfloat gCubeVertexData[360] =
         {6,1,10}, {9,0,11}, {9,11,2}, {9,2,5}, {7,2,11}
     };
     
-    GLcolor4f c = { 1.0f, 0, 0, 1.0f };
+    GLcolor4f c = { 1.0f, 1.0f, 1.0f, 1.0f };
     
     // seed initial vertices
     for(int i = 0; i < 20; i++)
@@ -153,15 +163,18 @@ GLfloat gCubeVertexData[360] =
         globeTris[i].a.vertex = icosa_vertices[icosa_tris[i][0]];
         globeTris[i].a.vertex = globeTris[i].a.vertex/globeTris[i].a.vertex.magnitude();
         globeTris[i].a.normal = globeTris[i].a.vertex/globeTris[i].a.vertex.magnitude();
+        globeTris[i].a.texcoord = globeTris[i].a.vertex.toLatLong();
         
         globeTris[i].b.vertex = icosa_vertices[icosa_tris[i][1]];
         globeTris[i].b.vertex = globeTris[i].b.vertex/globeTris[i].b.vertex.magnitude();
         globeTris[i].b.normal = globeTris[i].b.vertex/globeTris[i].b.vertex.magnitude();
-        
+        globeTris[i].b.texcoord = globeTris[i].b.vertex.toLatLong();
+
         globeTris[i].c.vertex = icosa_vertices[icosa_tris[i][2]];
         globeTris[i].c.vertex = globeTris[i].c.vertex/globeTris[i].c.vertex.magnitude();
         globeTris[i].c.normal = globeTris[i].c.vertex/globeTris[i].c.vertex.magnitude();
-        
+        globeTris[i].c.texcoord = globeTris[i].c.vertex.toLatLong();
+
         globeTris[i].a.color = globeTris[i].b.color = globeTris[i].c.color = c;
     }
     
@@ -181,36 +194,60 @@ GLfloat gCubeVertexData[360] =
             GLvertex3f bc_midpt = tri.b.vertex + (tri.c.vertex - tri.b.vertex)/2;
             
             GLtrif w = tri;
+            
             w.a.vertex = tri.a.vertex;
             w.a.normal = w.a.vertex;
+            w.a.texcoord = w.a.vertex.toLatLong();
+            
             w.b.vertex = ab_midpt/ab_midpt.magnitude();
             w.b.normal = w.b.vertex;
+            w.b.texcoord = w.b.vertex.toLatLong();
+            
             w.c.vertex = ac_midpt/ac_midpt.magnitude();
             w.c.normal = w.c.vertex;
+            w.c.texcoord = w.c.vertex.toLatLong();
             
             GLtrif x = tri;
+            
             x.a.vertex = tri.b.vertex;
             x.a.normal = x.a.vertex;
+            x.a.texcoord = x.a.vertex.toLatLong();
+
             x.b.vertex = bc_midpt/bc_midpt.magnitude();
             x.b.normal = x.b.vertex;
+            x.b.texcoord = x.b.vertex.toLatLong();
+            
             x.c.vertex = ab_midpt/ab_midpt.magnitude();
             x.c.normal = x.c.vertex;
+            x.c.texcoord = x.c.vertex.toLatLong();
             
             GLtrif y = tri;
+            
             y.a.vertex = tri.c.vertex;
             y.a.normal = y.a.vertex;
+            y.a.texcoord = y.a.vertex.toLatLong();
+
             y.b.vertex = ac_midpt/ac_midpt.magnitude();
             y.b.normal = y.b.vertex;
+            y.b.texcoord = y.b.vertex.toLatLong();
+            
             y.c.vertex = bc_midpt/bc_midpt.magnitude();
             y.c.normal = y.c.vertex;
+            y.c.texcoord = y.c.vertex.toLatLong();
             
             GLtrif z = tri;
+            
             z.a.vertex = ab_midpt/ab_midpt.magnitude();
             z.a.normal = z.a.vertex;
+            z.a.texcoord = z.a.vertex.toLatLong();
+            
             z.b.vertex = ac_midpt/ac_midpt.magnitude();
             z.b.normal = z.b.vertex;
+            z.b.texcoord = z.b.vertex.toLatLong();
+            
             z.c.vertex = bc_midpt/bc_midpt.magnitude();
             z.c.normal = z.c.vertex;
+            z.c.texcoord = z.c.vertex.toLatLong();
             
             globeTris[i] = w;
             globeTris[i+numTris*1] = x;
@@ -220,8 +257,6 @@ GLfloat gCubeVertexData[360] =
         
         numTris *= 4;
     }
-    
-    [self setupGL];
 }
 
 - (void)viewDidUnload
@@ -313,20 +348,14 @@ GLfloat gCubeVertexData[360] =
     
     /*** lighting ***/
     
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
     
     glShadeModel(GL_SMOOTH);
-    
-    /*** model/view ***/
-    
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glTranslatef(0, 0, -5);
-    glRotatef(_rotation/M_PI*180.0f, 0, 1, 0);
-    
-    /*** lighting ***/
     
     //GLfloat light_ambient[] = { 0.8, 0.8, 0.8, 1.0 };
     GLfloat light_ambient[] = { 0, 0, 0, 0.0 };
@@ -350,28 +379,29 @@ GLfloat gCubeVertexData[360] =
     
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
     
+    /*** model/view ***/
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslatef(0, 0, -3);
+    glRotatef(90, 1, 0, 0);
+    glRotatef(-_rotation/M_PI*180.0f, 0, 0, 1);
+    
     /*** supply primitives ***/
-
-//    glBindVertexArrayOES(_vertexArray);
     
-    // Render the object with GLKit
-//    [self.effect prepareToDraw];
-    
-//    glVertexPointer(3, GL_FLOAT, 10*sizeof(GLfloat), gCubeVertexData);
-//    glEnableClientState(GL_VERTEX_ARRAY);
-//    glNormalPointer(GL_FLOAT, 10*sizeof(GLfloat), gCubeVertexData+3);
-//    glEnableClientState(GL_NORMAL_ARRAY);
-//    glColorPointer(4, GL_FLOAT, 10*sizeof(GLfloat), gCubeVertexData+6);
-//    glEnableClientState(GL_COLOR_ARRAY);
-//    
-//    glDrawArrays(GL_TRIANGLES, 0, 36);
-    
+    glEnable(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glBindTexture(GL_TEXTURE_2D, earthTex);
+        
     glVertexPointer(3, GL_FLOAT, sizeof(GLgeoprimf), &globeTris[0].a.vertex);
     glEnableClientState(GL_VERTEX_ARRAY);
     glNormalPointer(GL_FLOAT, sizeof(GLgeoprimf), &globeTris[0].a.normal);
     glEnableClientState(GL_NORMAL_ARRAY);
     glColorPointer(4, GL_FLOAT, sizeof(GLgeoprimf), &globeTris[0].a.color);
     glEnableClientState(GL_COLOR_ARRAY);
+    glTexCoordPointer(2, GL_FLOAT, sizeof(GLgeoprimf), &globeTris[0].a.texcoord);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     
     glDrawArrays(GL_TRIANGLES, 0, numGlobeTris*3);
 }

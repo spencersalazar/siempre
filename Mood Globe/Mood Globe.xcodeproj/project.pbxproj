@@ -21,6 +21,8 @@
 		09580325159A6FB100508D89 /* MGViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09580323159A6FB100508D89 /* MGViewController_iPhone.xib */; };
 		09580328159A6FB100508D89 /* MGViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09580326159A6FB100508D89 /* MGViewController_iPad.xib */; };
 		09580333159A8EEC00508D89 /* Geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09580332159A8EEC00508D89 /* Geometry.cpp */; };
+		0958033B159AA59E00508D89 /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0958033A159AA59E00508D89 /* Texture.mm */; };
+		0958033E159AA5C100508D89 /* Land_shallow_topo_2048.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0958033D159AA5C100508D89 /* Land_shallow_topo_2048.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,9 @@
 		09580327159A6FB100508D89 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MGViewController_iPad.xib; sourceTree = "<group>"; };
 		09580332159A8EEC00508D89 /* Geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		09580334159A8F0000508D89 /* Geometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Geometry.h; sourceTree = "<group>"; };
+		09580339159AA59E00508D89 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		0958033A159AA59E00508D89 /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
+		0958033D159AA5C100508D89 /* Land_shallow_topo_2048.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Land_shallow_topo_2048.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,17 +99,19 @@
 		09580310159A6FB100508D89 /* Mood Globe */ = {
 			isa = PBXGroup;
 			children = (
+				09580339159AA59E00508D89 /* Texture.h */,
+				0958033A159AA59E00508D89 /* Texture.mm */,
 				09580319159A6FB100508D89 /* MGAppDelegate.h */,
 				0958031A159A6FB100508D89 /* MGAppDelegate.mm */,
 				0958031C159A6FB100508D89 /* Shader.fsh */,
 				0958031E159A6FB100508D89 /* Shader.vsh */,
 				09580320159A6FB100508D89 /* MGViewController.h */,
 				09580321159A6FB100508D89 /* MGViewController.mm */,
+				09580334159A8F0000508D89 /* Geometry.h */,
+				09580332159A8EEC00508D89 /* Geometry.cpp */,
 				09580323159A6FB100508D89 /* MGViewController_iPhone.xib */,
 				09580326159A6FB100508D89 /* MGViewController_iPad.xib */,
 				09580311159A6FB100508D89 /* Supporting Files */,
-				09580332159A8EEC00508D89 /* Geometry.cpp */,
-				09580334159A8F0000508D89 /* Geometry.h */,
 			);
 			path = "Mood Globe";
 			sourceTree = "<group>";
@@ -112,6 +119,7 @@
 		09580311159A6FB100508D89 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0958033D159AA5C100508D89 /* Land_shallow_topo_2048.jpg */,
 				09580312159A6FB100508D89 /* Mood Globe-Info.plist */,
 				09580313159A6FB100508D89 /* InfoPlist.strings */,
 				09580316159A6FB100508D89 /* main.m */,
@@ -177,6 +185,7 @@
 				0958031F159A6FB100508D89 /* Shader.vsh in Resources */,
 				09580325159A6FB100508D89 /* MGViewController_iPhone.xib in Resources */,
 				09580328159A6FB100508D89 /* MGViewController_iPad.xib in Resources */,
+				0958033E159AA5C100508D89 /* Land_shallow_topo_2048.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +200,7 @@
 				0958031B159A6FB100508D89 /* MGAppDelegate.mm in Sources */,
 				09580322159A6FB100508D89 /* MGViewController.mm in Sources */,
 				09580333159A8EEC00508D89 /* Geometry.cpp in Sources */,
+				0958033B159AA59E00508D89 /* Texture.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +324,7 @@
 				0958032D159A6FB100508D89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

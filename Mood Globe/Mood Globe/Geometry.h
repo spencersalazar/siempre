@@ -9,6 +9,12 @@
 #ifndef Mood_Globe_Geometry_h
 #define Mood_Globe_Geometry_h
 
+#include <math.h>
+#include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES1/glext.h>
+
+struct GLvertex2f;
+
 struct GLvertex3f
 {
     GLfloat x;
@@ -16,31 +22,14 @@ struct GLvertex3f
     GLfloat z;
     
     GLfloat magnitude() { return sqrtf(x*x+y*y+z*z); }
+    
+    GLvertex2f toLatLong();
 } __attribute__((packed));
 
-GLvertex3f operator+(const GLvertex3f &v1, const GLvertex3f &v2)
-{
-    GLvertex3f v3 = { v1.x+v2.x, v1.y+v2.y, v1.z+v2.z };
-    return v3;
-}
-
-GLvertex3f operator-(const GLvertex3f &v1, const GLvertex3f &v2)
-{
-    GLvertex3f v3 = { v1.x-v2.x, v1.y-v2.y, v1.z-v2.z };
-    return v3;
-}
-
-GLvertex3f operator*(const GLvertex3f &v, const GLfloat &s)
-{
-    GLvertex3f v2 = { v.x*s, v.y*s, v.z*s };
-    return v2;
-}
-
-GLvertex3f operator/(const GLvertex3f &v, const GLfloat &s)
-{
-    GLvertex3f v2 = { v.x/s, v.y/s, v.z/s };
-    return v2;
-}
+GLvertex3f operator+(const GLvertex3f &v1, const GLvertex3f &v2);
+GLvertex3f operator-(const GLvertex3f &v1, const GLvertex3f &v2);
+GLvertex3f operator*(const GLvertex3f &v, const GLfloat &s);
+GLvertex3f operator/(const GLvertex3f &v, const GLfloat &s);
 
 struct GLcolor4f
 {
@@ -65,6 +54,7 @@ struct GLgeoprimf
     GLcolor4f color;
 } __attribute__((packed));
 
+// triangle primitive -- 3 vertex primitives
 struct GLtrif
 {
     GLgeoprimf a;
