@@ -96,9 +96,11 @@ GLfloat gCubeVertexData[360] =
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
-    //int N = 
+    // number of subdivisions
+    int N = 5;
     
     numGlobeTris = 20;
+    for(int n = 1; n < N; n++) numGlobeTris *= 4;
     globeTris = new GLtrif[numGlobeTris];
     memset(globeTris, 0, sizeof(GLtrif)*numGlobeTris);
     // draw globe from subdivided icosahedron
@@ -145,7 +147,8 @@ GLfloat gCubeVertexData[360] =
     
     GLcolor4f c = { 1.0f, 0, 0, 1.0f };
     
-    for(int i = 0; i < numGlobeTris; i++)
+    // seed initial vertices
+    for(int i = 0; i < 20; i++)
     {
         globeTris[i].a.vertex = icosa_vertices[icosa_tris[i][0]];
         globeTris[i].a.vertex = globeTris[i].a.vertex/globeTris[i].a.vertex.magnitude();
@@ -160,6 +163,62 @@ GLfloat gCubeVertexData[360] =
         globeTris[i].c.normal = globeTris[i].c.vertex/globeTris[i].c.vertex.magnitude();
         
         globeTris[i].a.color = globeTris[i].b.color = globeTris[i].c.color = c;
+    }
+    
+    // subdivide
+    int numTris = 20;
+    for(int n = 0; n < N-1; n++)
+    {
+        for(int i = 0; i < numTris; i++)
+        {
+            // subdivide by dividing existing triangle into 4 triangles, adding
+            // 3 extra vertices at the midpoints
+            // normalize all vertices to ensure unit radius
+            GLtrif tri = globeTris[i];
+            
+            GLvertex3f ab_midpt = tri.a.vertex + (tri.b.vertex - tri.a.vertex)/2;
+            GLvertex3f ac_midpt = tri.a.vertex + (tri.c.vertex - tri.a.vertex)/2;
+            GLvertex3f bc_midpt = tri.b.vertex + (tri.c.vertex - tri.b.vertex)/2;
+            
+            GLtrif w = tri;
+            w.a.vertex = tri.a.vertex;
+            w.a.normal = w.a.vertex;
+            w.b.vertex = ab_midpt/ab_midpt.magnitude();
+            w.b.normal = w.b.vertex;
+            w.c.vertex = ac_midpt/ac_midpt.magnitude();
+            w.c.normal = w.c.vertex;
+            
+            GLtrif x = tri;
+            x.a.vertex = tri.b.vertex;
+            x.a.normal = x.a.vertex;
+            x.b.vertex = bc_midpt/bc_midpt.magnitude();
+            x.b.normal = x.b.vertex;
+            x.c.vertex = ab_midpt/ab_midpt.magnitude();
+            x.c.normal = x.c.vertex;
+            
+            GLtrif y = tri;
+            y.a.vertex = tri.c.vertex;
+            y.a.normal = y.a.vertex;
+            y.b.vertex = ac_midpt/ac_midpt.magnitude();
+            y.b.normal = y.b.vertex;
+            y.c.vertex = bc_midpt/bc_midpt.magnitude();
+            y.c.normal = y.c.vertex;
+            
+            GLtrif z = tri;
+            z.a.vertex = ab_midpt/ab_midpt.magnitude();
+            z.a.normal = z.a.vertex;
+            z.b.vertex = ac_midpt/ac_midpt.magnitude();
+            z.b.normal = z.b.vertex;
+            z.c.vertex = bc_midpt/bc_midpt.magnitude();
+            z.c.normal = z.c.vertex;
+            
+            globeTris[i] = w;
+            globeTris[i+numTris*1] = x;
+            globeTris[i+numTris*2] = y;
+            globeTris[i+numTris*3] = z;
+        }
+        
+        numTris *= 4;
     }
     
     [self setupGL];

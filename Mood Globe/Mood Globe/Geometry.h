@@ -18,6 +18,18 @@ struct GLvertex3f
     GLfloat magnitude() { return sqrtf(x*x+y*y+z*z); }
 } __attribute__((packed));
 
+GLvertex3f operator+(const GLvertex3f &v1, const GLvertex3f &v2)
+{
+    GLvertex3f v3 = { v1.x+v2.x, v1.y+v2.y, v1.z+v2.z };
+    return v3;
+}
+
+GLvertex3f operator-(const GLvertex3f &v1, const GLvertex3f &v2)
+{
+    GLvertex3f v3 = { v1.x-v2.x, v1.y-v2.y, v1.z-v2.z };
+    return v3;
+}
+
 GLvertex3f operator*(const GLvertex3f &v, const GLfloat &s)
 {
     GLvertex3f v2 = { v.x*s, v.y*s, v.z*s };
